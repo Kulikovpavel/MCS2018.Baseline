@@ -60,11 +60,11 @@ def chunks(arr, chunk_size):
 '''
 
 def main(args):
-    net = MCS2018.Predictor(args.gpu_id)
-    
     if args.precomputed:
       with open('img_descriptors_1M.npy', 'rb') as f:
         precomputed_arr = np.load(f)
+    else:
+      net = MCS2018.Predictor(args.gpu_id)
 
     #img list is needed for descriptors order
     img_list = glob.glob(os.path.join(args.root, '*.jpg'))[:1000]
