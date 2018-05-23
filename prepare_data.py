@@ -47,6 +47,9 @@ parser.add_argument('--gpu_id',
                     type=int,
                     default=-1,
                     help='GPU id, if you want to use GPU. For CPU gpu_id=-1')
+
+parser.add_argument('-precomputed', action='store_true')
+
 args = parser.parse_args()
 
 '''
@@ -58,6 +61,10 @@ def chunks(arr, chunk_size):
 
 def main(args):
     net = MCS2018.Predictor(args.gpu_id)
+    
+    if args.precomputed:
+      with open('img_descriptors_1M.npy', 'rb') as f:
+        precomputed_arr = np.load(f)
 
     #img list is needed for descriptors order
     img_list = glob.glob(os.path.join(args.root, '*.jpg'))[:1000]
@@ -74,7 +81,10 @@ def main(args):
     for idx, img_name in tqdm(enumerate(img_list), total=len(img_list)):
         img = Image.open(img_name)
         img_arr = preprocessing(img).unsqueeze(0).numpy()
-        res = net.submit(img_arr).squeeze()
+        if args.precomputed:
+          res = precomputed_arr[idx]
+        else:
+          res = net.submit(img_arr).squeeze()
         descriptors[idx] = res
 
     '''
