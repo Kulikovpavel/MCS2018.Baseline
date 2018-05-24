@@ -2,19 +2,8 @@
 Prepare data for student model learning
 '''
 
-import MCS2018
-net = MCS2018.Predictor(args.gpu_id)
-
-
 import os
 import argparse
-
-import numpy as np
-import pandas as pd
-from PIL import Image
-from tqdm import tqdm
-from torchvision import transforms
-import glob
 
 
 MEAN = [0.485, 0.456, 0.406]
@@ -61,6 +50,20 @@ def chunks(arr, chunk_size):
         # Create an index range for l of n items:
         yield arr[i:i+chunk_size]
 '''
+
+
+import MCS2018
+net = MCS2018.Predictor(args.gpu_id)
+
+
+import numpy as np
+import pandas as pd
+from PIL import Image
+from tqdm import tqdm
+from torchvision import transforms
+import glob
+
+
 
 def main(args):
     if args.precomputed:
