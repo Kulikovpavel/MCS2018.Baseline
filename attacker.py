@@ -73,6 +73,8 @@ def get_model(model_name, checkpoint_path):
         net = ResNet34()
     elif model_name == 'ResNet50':
         net = ResNet50()
+    elif model_name == 'ResNet152':
+        net = ResNet152()
     elif model_name == 'DenseNet':
         net = DenseNet121()
     elif model_name == 'VGG11':
