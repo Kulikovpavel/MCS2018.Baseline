@@ -64,10 +64,13 @@ def main(args):
 
 	if args.student_model_imgs:
 		print ('==> Student model images downloading')
-		downloader(STUDENT_MODEL_IMGS_URL, args.root)
-		print ('==> Student model images downloaded')
 		zipfile_path = os.path.join(args.root, 'student_model_imgs.zip')
 		dir_path = os.path.join(args.root, 'student_model_imgs')
+		
+		if not os.path.isfile(zipfile_path):
+			downloader(STUDENT_MODEL_IMGS_URL, args.root)
+		print ('==> Student model images downloaded')
+
 		
 		if not os.path.isdir(dir_path):
 			os.makedirs(dir_path)
