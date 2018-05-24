@@ -2,6 +2,10 @@
 Prepare data for student model learning
 '''
 
+import MCS2018
+net = MCS2018.Predictor(args.gpu_id)
+
+
 import os
 import argparse
 
@@ -12,7 +16,6 @@ from tqdm import tqdm
 from torchvision import transforms
 import glob
 
-import MCS2018
 
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
@@ -63,8 +66,6 @@ def main(args):
     if args.precomputed:
       with open('img_descriptors_1M.npy', 'rb') as f:
         precomputed_arr = np.load(f)
-    else:
-      net = MCS2018.Predictor(args.gpu_id)
 
     #img list is needed for descriptors order
     img_list = glob.glob(os.path.join(args.root, '*.jpg'))[:1000]
