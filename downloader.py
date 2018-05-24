@@ -56,22 +56,22 @@ def main(args):
 		if not os.path.isdir(dir_path):
 			os.makedirs(dir_path)
 		
-		with zipfile.ZipFile(file_path,'r') as myzip:
+		with zipfile.ZipFile(zipfile_path,'r') as myzip:
 			myzip.extractall(path=dir_path)
 
 		print ('==> Main imgs extracted')
 
 	if args.student_model_imgs:
 		print ('==> Student model images downloading')
-		downloader(STUDENT_MODEL_IMGS, args.root)
+		downloader(STUDENT_MODEL_IMGS_URL, args.root)
 		print ('==> Student model images downloaded')
-		ipfile_path = os.path.join(args.root, 'student_model_imgs.zip')
+		zipfile_path = os.path.join(args.root, 'student_model_imgs.zip')
 		dir_path = os.path.join(args.root, 'student_model_imgs')
 		
 		if not os.path.isdir(dir_path):
 			os.makedirs(dir_path)
 		
-		with zipfile.ZipFile(file_path,'r') as myzip:
+		with zipfile.ZipFile(zipfile_path,'r') as myzip:
 			myzip.extractall(path=dir_path)
 
 		print ('==> Student model images extracted')
