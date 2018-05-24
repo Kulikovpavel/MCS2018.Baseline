@@ -255,6 +255,8 @@ def main():
         net = ResNet34()
     elif args.model_name == 'ResNet50':
         net = ResNet50()
+    elif args.model_name == 'ResNet152':
+        net = ResNet152()
     elif args.model_name == 'DenseNet':
         net = DenseNet121()
     elif args.model_name == 'VGG11':
