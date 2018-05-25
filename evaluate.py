@@ -1,6 +1,10 @@
 '''
 Evaluate script before submit
 '''
+import MCS2018
+
+# loading black-box model
+net = MCS2018.Predictor(0)
 
 import os
 import zipfile
@@ -56,8 +60,6 @@ def euclid_dist(x,y, axis=1):
     return np.sqrt(((x - y) ** 2).sum(axis=axis))
 
 def main(args):
-    # loading black-box model
-    net = MCS2018.Predictor(args.gpu_id)
 
     img_list = pd.read_csv(args.submit_list)
     descriptors = np.ones((len(img_list), 512))
