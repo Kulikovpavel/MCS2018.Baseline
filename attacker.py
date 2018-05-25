@@ -143,7 +143,8 @@ class FGSM_Attacker():
             #print ('TEST: attack on image {0}'.format(img_name))
 
             #img is attacked
-            if os.path.isfile(os.path.join(self.args.save_root, img_name)):
+            if os.path.isfile(os.path.join(self.args.save_root, img_name.replace('.jpg', '.png'))):
+                print('already exists')
                 continue
 
             img = Image.open(os.path.join(self.args.root, img_name))
