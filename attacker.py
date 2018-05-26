@@ -214,7 +214,7 @@ def main():
 
 
     attacker = FGSM_Attacker(model,
-                        eps=5e-1,
+                        eps=1e-2,
                         ssim_thr=SSIM_THR,
                         transform=transform,
                         img2tensor=img2tensor,
