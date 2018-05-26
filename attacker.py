@@ -174,9 +174,9 @@ class FGSM_Attacker():
                     out = self.model(input_var)
                     calc_loss = self.loss(out, target_out)
                     calc_loss.backward()
-#                     noise = self.eps * torch.sign(input_var.grad.data)\
-#                                        .squeeze()
-                    noise = self.eps * input_var.grad.data.squeeze()  
+                    noise = self.eps * torch.sign(input_var.grad.data)\
+                                       .squeeze()
+#                     noise = self.eps * input_var.grad.data.squeeze()  
                     adv_noise = adv_noise + noise
 
                 input_var.data = input_var.data - adv_noise
