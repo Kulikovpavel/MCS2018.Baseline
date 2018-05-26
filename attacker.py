@@ -46,6 +46,10 @@ parser.add_argument('--model_name',
                     type=str, 
                     help='model name', 
                     default='ResNet18')
+parser.add_argument('--eps',
+                    type=float, 
+                    help='eps', 
+                    default=1e-2)
 parser.add_argument('--checkpoint_path',
                     required=True,
                     type=str,
@@ -179,13 +183,16 @@ class FGSM_Attacker():
                 changed_img = self.tensor2img(input_var.data.cpu().squeeze())
 
                 #SSIM checking
+          
                 ssim = compare_ssim(np.array(original_img, dtype=np.float32), 
                                     np.array(changed_img, dtype=np.float32), 
                                     multichannel=True)
+            
                 if ssim < self.ssim_thr:
                     break
                 else:
                     attacked_img = changed_img
+                    print(ssim)
             #tock = time.time()
             #print ('TEST: end iterations. Time: {0:.2f}sec'.format(tock - tick))
 
@@ -214,7 +221,7 @@ def main():
 
 
     attacker = FGSM_Attacker(model,
-                        eps=1e-2,
+                        eps=args.eps,
                         ssim_thr=SSIM_THR,
                         transform=transform,
                         img2tensor=img2tensor,
