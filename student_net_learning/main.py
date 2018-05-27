@@ -269,7 +269,7 @@ def main():
         # Load checkpoint
         print('==> Resuming from checkpoint..')
         assert os.path.isdir('checkpoint'), 'Error: no checkpoint directory found!'
-        checkpoint = torch.load('./checkpoint/{0}/best_model_ckpt.t7'.format(args.name))
+        checkpoint = torch.load('./checkpoint/{0}/best_model_chkpt.t7'.format(args.name))
         net.load_state_dict(checkpoint['net'])
         best_loss = checkpoint['loss']
         start_epoch = checkpoint['epoch'] + 1
