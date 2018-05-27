@@ -101,7 +101,7 @@ def main(args):
     # axis 2 - descriptor size
     descriptors = descriptors.reshape((5,-1,512), order='F')
 
-    N =  len(val_img_list)
+    
     
     if not os.path.isfile(args.target_dscr):
         pairs_list = pd.read_csv(args.pairs_list)
@@ -118,7 +118,7 @@ def main(args):
                 img_name = os.path.join(args.original_root, img_name)
                 val_img_list.append(img_name)
 
-        
+        N =  len(val_img_list)
         target_descriptors = np.ones((N, 512), dtype=np.float32)
         for idx, img_name in tqdm(enumerate(val_img_list), 
                                   total=len(val_img_list),
@@ -134,6 +134,7 @@ def main(args):
 
     #target descriptors shape: (5,1000,512)
     target_descriptors = np.load(args.target_dscr)
+    N = target_descriptors.shape[0]*target_descriptors.shape[1]
 
     # axis 0 - img number for source class
     # axis 1 - img number for target class
