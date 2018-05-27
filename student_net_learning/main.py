@@ -137,6 +137,7 @@ def train(epoch):
         progress_bar(batch_idx, 
                      len(trainloader),
                      'Loss: {l:.3f}'.format(l = train_loss/(batch_idx+1)))
+    print('Train loss: ', train_loss/(batch_idx+1))
 
 def validation(epoch):
     
@@ -171,7 +172,7 @@ def validation(epoch):
                      'Loss: {l:.3f}'.format(l = val_loss/(batch_idx+1)))
     val_loss = val_loss/(batch_idx+1)
     if val_loss < best_loss:
-        print('Saving..')
+        print('Saving.. val loss:', val_loss)
         state = {
             'net': net.state_dict() if torch.cuda.device_count() <= 1 \
                                     else net.module.state_dict(),
