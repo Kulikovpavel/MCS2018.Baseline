@@ -99,7 +99,7 @@ def main(args):
     # axis 0 - number of imgs for each class
     # axis 1 - number of classes
     # axis 2 - descriptor size
-    descriptors = descriptors.reshape((5,1000,512), order='F')
+    descriptors = descriptors.reshape((5,-1,512), order='F')
 
     if not os.path.isfile(args.target_dscr):
         pairs_list = pd.read_csv(args.pairs_list)
@@ -116,7 +116,8 @@ def main(args):
                 img_name = os.path.join(args.original_root, img_name)
                 val_img_list.append(img_name)
 
-        target_descriptors = np.ones((5000, 512), dtype=np.float32)
+        N =  len(val_img_list)
+        target_descriptors = np.ones((N, 512), dtype=np.float32)
         for idx, img_name in tqdm(enumerate(val_img_list), 
                                   total=len(val_img_list),
                                   desc='get descriptors'):
@@ -124,7 +125,8 @@ def main(args):
             img_arr = preprocessing(img).unsqueeze(0).numpy()
             res = net.submit(img_arr).squeeze()
             target_descriptors[idx] = res
-        target_descriptors = target_descriptors.reshape((5,1000,512), 
+            
+        target_descriptors = target_descriptors.reshape((5,-1,512), 
                                                         order='F')
         np.save(args.target_dscr, target_descriptors)
 
@@ -134,7 +136,7 @@ def main(args):
     # axis 0 - img number for source class
     # axis 1 - img number for target class
     # axis 2 - number of classes
-    dist_all = np.zeros((5,5,1000))
+    dist_all = np.zeros((5,5,N//5))
 
     for idx, dscr_row in enumerate(descriptors):
         for jdx, target_dscr_row in enumerate(target_descriptors):
