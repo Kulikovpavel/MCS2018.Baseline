@@ -38,6 +38,9 @@ parser.add_argument('--lr',
 parser.add_argument('--resume',
                     action='store_true', 
                     help='resume from checkpoint')
+parser.add_argument('--to_drive',
+                    action='store_true', 
+                    help='resume from checkpoint')
 parser.add_argument('--optimizer',
                     type=str, 
                     help='optimizer type', 
@@ -180,7 +183,10 @@ def validation(epoch):
             'epoch': epoch,
             'arguments': args
         }
-        session_checkpoint = 'checkpoint/{name}/'.format(name=args.name)
+        if args.to_drive:
+          session_checkpoint = '../drive/MCS2018/checkpoint/{name}/'.format(name=args.name)
+        else:
+          session_checkpoint = 'checkpoint/{name}/'.format(name=args.name)
         if not os.path.isdir(session_checkpoint):
             os.makedirs(session_checkpoint)
         torch.save(state, session_checkpoint + 'best_model_chkpt.t7')
@@ -268,8 +274,11 @@ def main():
     if args.resume:
         # Load checkpoint
         print('==> Resuming from checkpoint..')
-        assert os.path.isdir('checkpoint'), 'Error: no checkpoint directory found!'
-        checkpoint = torch.load('./checkpoint/{0}/best_model_chkpt.t7'.format(args.name))
+        if args.to_drive:
+          session_checkpoint = '../drive/MCS2018/checkpoint/{name}/'.format(name=args.name)
+        else:
+          session_checkpoint = 'checkpoint/{name}/'.format(name=args.name)
+        checkpoint = torch.load(session_checkpoint + 'best_model_chkpt.t7')
         net.load_state_dict(checkpoint['net'])
         best_loss = checkpoint['loss']
         start_epoch = checkpoint['epoch'] + 1
