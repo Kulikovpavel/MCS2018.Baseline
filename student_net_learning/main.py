@@ -271,7 +271,7 @@ def main():
     elif args.model_name == 'DenseNet':
         net = DenseNet121()
     elif args.model_name == 'Inception3':
-        net = Inception3()
+        net = Inception3(512, false)
     elif args.model_name == 'VGG11':
         net = VGG('VGG11')
 
