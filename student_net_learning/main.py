@@ -187,6 +187,7 @@ def validation(epoch):
           session_checkpoint = '../drive/MCS2018/checkpoint/{name}/'.format(name=args.name)
         else:
           session_checkpoint = '../data/checkpoint/{name}/'.format(name=args.name)
+        print(session_checkpoint)  
         if not os.path.isdir(session_checkpoint):
             os.makedirs(session_checkpoint)
         torch.save(state, session_checkpoint + 'best_model_chkpt.t7')
