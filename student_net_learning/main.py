@@ -286,6 +286,8 @@ def main():
     # Choosing of criterion
     if args.criterion == 'MSE':
         criterion = nn.MSELoss()
+    elif args.criterion == 'L1':
+        criterion = nn.L1Loss()
     else:
         criterion = None # Add your criterion
 
