@@ -71,7 +71,7 @@ def main(args):
         precomputed_arr = np.load(f)
 
     #img list is needed for descriptors order
-    img_list = glob.glob(os.path.join(args.root, '*.jpg'))[:1000]
+    img_list = glob.glob(os.path.join(args.root, '*.jpg'))
     #img_list = pd.read_csv(args.datalist).path.values
     descriptors = np.ones((len(img_list),512), dtype=np.float32)
 
@@ -81,14 +81,14 @@ def main(args):
                 transforms.ToTensor(),
                 transforms.Normalize(mean=MEAN, std=STD),
                 ])
-
-    for idx, img_name in tqdm(enumerate(img_list), total=len(img_list)):
+    
+    if args.precomputed:
+      descriptors = precomputed_arr
+    else:
+      for idx, img_name in tqdm(enumerate(img_list), total=len(img_list)):
         img = Image.open(img_name)
         img_arr = preprocessing(img).unsqueeze(0).numpy()
-        if args.precomputed:
-          res = precomputed_arr[idx]
-        else:
-          res = net.submit(img_arr).squeeze()
+        res = net.submit(img_arr).squeeze()
         descriptors[idx] = res
 
     '''
