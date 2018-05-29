@@ -186,7 +186,7 @@ def validation(epoch):
         if args.to_drive:
           session_checkpoint = '../drive/MCS2018/checkpoint/{name}/'.format(name=args.name)
         else:
-          session_checkpoint = 'checkpoint/{name}/'.format(name=args.name)
+          session_checkpoint = '../data/checkpoint/{name}/'.format(name=args.name)
         if not os.path.isdir(session_checkpoint):
             os.makedirs(session_checkpoint)
         torch.save(state, session_checkpoint + 'best_model_chkpt.t7')
@@ -280,7 +280,7 @@ def main():
         if args.to_drive:
           session_checkpoint = '../drive/MCS2018/checkpoint/{name}/'.format(name=args.name)
         else:
-          session_checkpoint = 'checkpoint/{name}/'.format(name=args.name)
+          session_checkpoint = '../data/checkpoint/{name}/'.format(name=args.name)
         checkpoint = torch.load(session_checkpoint + 'best_model_chkpt.t7')
         net.load_state_dict(checkpoint['net'])
         best_loss = checkpoint['loss']
