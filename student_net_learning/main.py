@@ -215,6 +215,9 @@ def main():
     #train preprocessing
     transform_train = transforms.Compose([
         transforms.Lambda(lambd=random_rotate_func),
+        transforms.Lambda(lambd=random_scale_func),
+        transforms.Lambda(lambd=gaus_blur_func),
+        transforms.Lambda(lambd=median_blur_func),
         transforms.CenterCrop(224),
         transforms.Scale((112,112)),
         transforms.RandomHorizontalFlip(),
