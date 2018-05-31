@@ -255,7 +255,7 @@ def main():
                                               batch_size=args.batch_size, 
                                               shuffle=True, 
                                               num_workers=8, 
-                                              pin_memory=False)
+                                              pin_memory=True)
 
     valset = ImageListDataset(root=args.root, 
                                list_path=args.datalist, 
@@ -266,7 +266,7 @@ def main():
                                              batch_size=args.batch_size, 
                                              shuffle=True, 
                                              num_workers=8, 
-                                             pin_memory=False)
+                                             pin_memory=True)
 
     # Create model
     net = None
