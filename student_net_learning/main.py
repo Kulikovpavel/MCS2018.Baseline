@@ -257,7 +257,7 @@ def main():
                                               num_workers=8, 
                                               pin_memory=True)
 
-    valset = ImageListDataset(root=args.root, 
+    valset = ImageListDataset(root='../'+args.root, 
                                list_path=args.datalist, 
                                split='val', 
                                transform=transform_val)
