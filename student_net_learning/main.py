@@ -146,7 +146,7 @@ def train(epoch):
                      len(trainloader),
                      'Loss: {l:.3f}'.format(l = train_loss/(batch_idx+1)))
         
-        if batch_idx > 1000:
+        if batch_idx > 5:
           break
     print('Train loss: ', train_loss/(batch_idx+1))
 
@@ -181,7 +181,7 @@ def validation(epoch):
         progress_bar(batch_idx, 
                      len(valloader), 
                      'Loss: {l:.3f}'.format(l = val_loss/(batch_idx+1)))
-        if batch_idx > 5:
+        if batch_idx > 100:
           break
     val_loss = val_loss/(batch_idx+1)
     if val_loss < best_loss:
