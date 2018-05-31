@@ -146,7 +146,7 @@ def train(epoch):
                      len(trainloader),
                      'Loss: {l:.3f}'.format(l = train_loss/(batch_idx+1)))
         
-        if batch_idx > 5:
+        if batch_idx > 1000:
           break
     print('Train loss: ', train_loss/(batch_idx+1))
 
