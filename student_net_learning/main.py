@@ -146,7 +146,7 @@ def train(epoch):
                      len(trainloader),
                      'Loss: {l:.3f}'.format(l = train_loss/(batch_idx+1)))
         
-        if batch_idx > 1000:
+        if batch_idx > 5:
           break
     print('Train loss: ', train_loss/(batch_idx+1))
 
@@ -255,7 +255,7 @@ def main():
                                               batch_size=args.batch_size, 
                                               shuffle=True, 
                                               num_workers=8, 
-                                              pin_memory=True)
+                                              pin_memory=False)
 
     valset = ImageListDataset(root=args.root, 
                                list_path=args.datalist, 
@@ -266,7 +266,7 @@ def main():
                                              batch_size=args.batch_size, 
                                              shuffle=True, 
                                              num_workers=8, 
-                                             pin_memory=True)
+                                             pin_memory=False)
 
     # Create model
     net = None
