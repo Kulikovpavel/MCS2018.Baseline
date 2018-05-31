@@ -254,7 +254,7 @@ def main():
     trainloader = torch.utils.data.DataLoader(trainset, 
                                               batch_size=args.batch_size, 
                                               shuffle=True, 
-                                              num_workers=8, 
+                                              num_workers=6, 
                                               pin_memory=True)
 
     valset = ImageListDataset(root=args.root, 
@@ -265,7 +265,7 @@ def main():
     valloader = torch.utils.data.DataLoader(valset, 
                                              batch_size=args.batch_size, 
                                              shuffle=True, 
-                                             num_workers=8, 
+                                             num_workers=2, 
                                              pin_memory=True)
 
     # Create model
