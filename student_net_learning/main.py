@@ -145,6 +145,9 @@ def train(epoch):
         progress_bar(batch_idx, 
                      len(trainloader),
                      'Loss: {l:.3f}'.format(l = train_loss/(batch_idx+1)))
+        
+        if batch_idx > 1000:
+          break
     print('Train loss: ', train_loss/(batch_idx+1))
 
 def validation(epoch):
@@ -178,6 +181,8 @@ def validation(epoch):
         progress_bar(batch_idx, 
                      len(valloader), 
                      'Loss: {l:.3f}'.format(l = val_loss/(batch_idx+1)))
+        if batch_idx > 100:
+          break
     val_loss = val_loss/(batch_idx+1)
     if val_loss < best_loss:
         print('Saving.. val loss:', val_loss)
@@ -211,12 +216,12 @@ def main():
     best_loss = np.finfo(np.float32).max
 
     #augmentation
-    random_rotate_func = lambda x: x.rotate(random.randint(-15,15),
+    random_rotate_func = lambda x: x.rotate(random.randint(-5,5),
                                             resample=Image.BICUBIC)
-    random_scale_func = lambda x: transforms.Scale(int(random.uniform(1.0,1.4)\
+    random_scale_func = lambda x: transforms.Scale(int(random.uniform(1.0,1.2)\
                                                    * max(x.size)))(x)
     gaus_blur_func = lambda x: x.filter(PIL.ImageFilter.GaussianBlur(radius=1))
-    median_blur_func = lambda x: x.filter(PIL.ImageFilter.MedianFilter(size=3))
+    median_blur_func = lambda x: x.filter(PIL.ImageFilter.MedianFilter(size=2))
 
     #train preprocessing
     transform_train = transforms.Compose([
@@ -259,7 +264,7 @@ def main():
 
     valloader = torch.utils.data.DataLoader(valset, 
                                              batch_size=args.batch_size, 
-                                             shuffle=False, 
+                                             shuffle=True, 
                                              num_workers=8, 
                                              pin_memory=True)
 
