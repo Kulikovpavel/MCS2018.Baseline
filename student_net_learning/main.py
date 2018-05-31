@@ -221,7 +221,7 @@ def main():
     random_scale_func = lambda x: transforms.Scale(int(random.uniform(1.0,1.2)\
                                                    * max(x.size)))(x)
     gaus_blur_func = lambda x: x.filter(PIL.ImageFilter.GaussianBlur(radius=1))
-    median_blur_func = lambda x: x.filter(PIL.ImageFilter.MedianFilter(size=2))
+    median_blur_func = lambda x: x.filter(PIL.ImageFilter.MedianFilter(size=3))
 
     #train preprocessing
     transform_train = transforms.Compose([
