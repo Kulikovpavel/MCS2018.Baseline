@@ -137,6 +137,11 @@ def train(epoch):
                        '{batch},{loss:.3f}\n'.format(epoch=epoch, 
                                                      batch=batch_idx,
                                                      loss=curr_batch_loss))
+        
+        print('train,{epoch},'\
+                       '{batch},{loss:.3f}\n'.format(epoch=epoch, 
+                                                     batch=batch_idx,
+                                                     loss=curr_batch_loss))
         progress_bar(batch_idx, 
                      len(trainloader),
                      'Loss: {l:.3f}'.format(l = train_loss/(batch_idx+1)))
