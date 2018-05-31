@@ -246,7 +246,7 @@ def main():
     ])
 
     print('==> Preparing data..')
-    trainset = ImageListDataset(root=args.root, 
+    trainset = ImageListDataset(root=args.root+'student_model_imgs', 
                                 list_path=args.datalist, 
                                 split='train', 
                                 transform=transform_train)
@@ -257,7 +257,7 @@ def main():
                                               num_workers=8, 
                                               pin_memory=True)
 
-    valset = ImageListDataset(root='../'+args.root, 
+    valset = ImageListDataset(root=args.root, 
                                list_path=args.datalist, 
                                split='val', 
                                transform=transform_val)
