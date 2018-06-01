@@ -134,19 +134,19 @@ def train(epoch):
         total += targets.size(0)
 
         log_file.write('train,{epoch},'\
-                       '{batch},{loss:.3f}\n'.format(epoch=epoch, 
+                       '{batch},{loss:.6f}\n'.format(epoch=epoch, 
                                                      batch=batch_idx,
                                                      loss=curr_batch_loss))
         
         print('train,{epoch},'\
-                       '{batch},{loss:.3f}\n'.format(epoch=epoch, 
+                       '{batch},{loss:.6f}\n'.format(epoch=epoch, 
                                                      batch=batch_idx,
                                                      loss=curr_batch_loss))
         progress_bar(batch_idx, 
                      len(trainloader),
-                     'Loss: {l:.3f}'.format(l = train_loss/(batch_idx+1)))
+                     'Loss: {l:.6f}'.format(l = train_loss/(batch_idx+1)))
         
-        if batch_idx > 1000:
+        if batch_idx > 1000*(32//self.batch_size):
           break
     print('Train loss: ', train_loss/(batch_idx+1))
 
@@ -180,7 +180,7 @@ def validation(epoch):
                                                      loss=curr_batch_loss))
         progress_bar(batch_idx, 
                      len(valloader), 
-                     'Loss: {l:.3f}'.format(l = val_loss/(batch_idx+1)))
+                     'Loss: {l:.6f}'.format(l = val_loss/(batch_idx+1)))
 #         print(batch_idx, val_loss)
         if batch_idx > 100:
           break
