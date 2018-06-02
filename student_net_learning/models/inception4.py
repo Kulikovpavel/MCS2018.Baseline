@@ -264,7 +264,7 @@ class InceptionV4(nn.Module):
         x = x.view(x.size(0), -1)
         x = self.classif(x) 
         x = self.fc_bn(x)
-        x = F.normalize(x, 2, 1)
+#         x = F.normalize(x, 2, 1)
         return x
 
 
