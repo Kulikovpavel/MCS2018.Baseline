@@ -125,7 +125,7 @@ def train(epoch):
         targets = Variable(targets, requires_grad=False)
         outputs = net(inputs)
 
-        loss = 512*criterion(outputs, targets)
+        loss = criterion(outputs, targets)
         loss.backward()
         optimizer.step()
 
@@ -146,7 +146,7 @@ def train(epoch):
                      len(trainloader),
                      'Loss: {l:.6f}'.format(l = train_loss/(batch_idx+1)))
         
-        if batch_idx > 1000*(32//args.batch_size):
+        if batch_idx > 500*(32//args.batch_size):
           break
     print('Train loss: ', train_loss/(batch_idx+1))
 
@@ -169,7 +169,7 @@ def validation(epoch):
         inputs, targets = Variable(inputs, volatile=True), Variable(targets)
         
         outputs = net(inputs)
-        loss = 512*criterion(outputs, targets)
+        loss = criterion(outputs, targets)
 
         curr_batch_loss = loss.data[0]
         val_loss += curr_batch_loss
@@ -182,7 +182,7 @@ def validation(epoch):
                      len(valloader), 
                      'Loss: {l:.6f}'.format(l = val_loss/(batch_idx+1)))
 #         print(batch_idx, val_loss)
-        if batch_idx > 100:
+        if batch_idx > 50:
           break
     val_loss = val_loss/(batch_idx+1)
     if val_loss < best_loss:
