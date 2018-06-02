@@ -264,13 +264,13 @@ class InceptionV4(nn.Module):
         x = x.view(x.size(0), -1)
         x = self.classif(x) 
         x = self.fc_bn(x)
+        x = F.normalize(x, 2, 1)
         return x
 
 
 def inceptionv4():
     r"""InceptionV4 model architecture from the
     `"Inception-v4, Inception-ResNet..." <https://arxiv.org/abs/1602.07261>`_ paper.
-
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
