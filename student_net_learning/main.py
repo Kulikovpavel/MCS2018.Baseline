@@ -287,6 +287,8 @@ def main():
         net = DenseNet201()
     elif args.model_name == 'DenseNet161':
         net = DenseNet161()
+    elif args.model_name == 'DenseNet169':
+        net = DenseNet169()
     elif args.model_name == 'Inception3':
         net = Inception3(512, False)
     elif args.model_name == 'VGG11':
