@@ -125,7 +125,7 @@ def train(epoch):
         targets = Variable(targets, requires_grad=False)
         outputs = net(inputs)
 
-        loss = criterion(outputs, targets)
+        loss = 512*criterion(outputs, targets)
         loss.backward()
         optimizer.step()
 
@@ -169,7 +169,7 @@ def validation(epoch):
         inputs, targets = Variable(inputs, volatile=True), Variable(targets)
         
         outputs = net(inputs)
-        loss = criterion(outputs, targets)
+        loss = 512*criterion(outputs, targets)
 
         curr_batch_loss = loss.data[0]
         val_loss += curr_batch_loss
