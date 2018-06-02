@@ -314,7 +314,7 @@ def main():
 
     # Choosing of optimizer
     if args.optimizer == 'adam':
-        optimizer = optim.Adam(net.parameters(), lr=args.lr)
+        optimizer = optim.Adam(net.parameters(), lr=args.lr, amsgrad=True)
     elif args.optimizer == 'adadelta':
         optimizer = optim.Adadelta(net.parameters(), lr=args.lr)
     else:
