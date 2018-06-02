@@ -257,7 +257,7 @@ class InceptionV4(nn.Module):
             nn.AvgPool2d(8, 1, 3, count_include_pad=False)
         )
         self.classif = nn.Linear(1536, num_classes)
-        self.fc_bn = nn.BatchNorm2d(num_classes, eps=0.000001, momentum=0.9, affine=True)
+        self.fc_bn = nn.BatchNorm1d(num_classes)
 
     def forward(self, x):
         x = self.features(x)
