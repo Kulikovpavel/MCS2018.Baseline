@@ -95,7 +95,9 @@ class ResNet(nn.Module):
         out = out.view(out.size(0), -1)
         out = self.linear(out)
 #         out = self.fc_bn(out)
-        out =  (out - out.mean(1, keepdim=True))/out.std(1, keepdim=True)/2        
+        m =  out.mean(1, keepdim=True)
+        s = out.std(1, keepdim=True)
+        out =  (out - m)/ (2*std)   
         return out
 
 
