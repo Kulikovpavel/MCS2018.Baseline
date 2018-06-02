@@ -34,6 +34,7 @@ class Mixed_3a(nn.Module):
         out = torch.cat((x0, x1), 1)
         return out
 
+    
 class Mixed_4a(nn.Module):
 
     def __init__(self):
