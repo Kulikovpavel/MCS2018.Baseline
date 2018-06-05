@@ -75,7 +75,8 @@ class ResNet(nn.Module):
         self.layer3 = self._make_layer(block, 256, num_blocks[2], stride=2)
         self.layer4 = self._make_layer(block, 512, num_blocks[3], stride=2)
         self.linear = nn.Linear(512*block.expansion, num_classes)
-        if not norm:
+        self.norm = norm
+        if not self.norm:
             self.fc_bn = nn.BatchNorm1d(512)
 
     def _make_layer(self, block, planes, num_blocks, stride):
@@ -95,7 +96,7 @@ class ResNet(nn.Module):
         out = F.avg_pool2d(out, 7)
         out = out.view(out.size(0), -1)
         out = self.linear(out)
-        if not norm:
+        if not self.norm:
             out = self.fc_bn(out)
         else:
             out = F.normalize(out, 2, 1)
