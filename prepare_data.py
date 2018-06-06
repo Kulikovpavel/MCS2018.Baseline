@@ -51,8 +51,11 @@ def chunks(arr, chunk_size):
         yield arr[i:i+chunk_size]
 '''
 
-
-import MCS2018
+if args.gpu_id == -1:
+  import MCS2018_CPU as MCS2018
+else: 
+  import MCS2018
+  
 net = MCS2018.Predictor(args.gpu_id)
 
 
